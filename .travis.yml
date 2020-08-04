@@ -1,0 +1,21 @@
+dist: trusty
+language: java
+
+notifications:
+  email: false
+
+before_install: chmod +x gradlew
+script: ./gradlew build -s
+
+jdk:
+  - oraclejdk8
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key: $GH_TOKEN
+  file_glob: true
+  file:
+    - "build/libs/*.jar"
+  on:
+    tags: true
